@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import SnakeGame from "./SnakeGame";
 
 type HistoryEntry = { cmd: string; output: string };
 
@@ -92,7 +93,8 @@ const COMMANDS: Record<string, string> = {
   ║  flip       - обърни маса >:(   ║
   ║  sudo       - опитай ;)         ║
   ║  matrix     - follow the rabbit ║
-  ║  ascii      - ASCII арт :3      ║
+  ║  ascii       - ASCII арт :3     ║
+  ║  snake      - 🐍 змия! :D      ║
   ║  clear      - изчисти всичко    ║
   ╚═══════════════════════════════════╝`,
 
