@@ -279,6 +279,7 @@ const Terminal = () => {
   const [dinoMode, setDinoMode] = useState(false);
   const [dinoScore, setDinoScore] = useState(0);
   const [dinoAlive, setDinoAlive] = useState(true);
+  const [snakeMode, setSnakeMode] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const dinoInterval = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -428,6 +429,16 @@ const Terminal = () => {
   
   Натискай Enter за скок! Напиши 'stop' за край ;)`,
           },
+        ]);
+        setInput("");
+        return;
+      }
+
+      if (cmd === "snake" || cmd === "змия") {
+        setSnakeMode(true);
+        setHistory((prev) => [
+          ...prev,
+          { cmd: raw, output: "  🐍 Зареждане на Snake... :D" },
         ]);
         setInput("");
         return;
