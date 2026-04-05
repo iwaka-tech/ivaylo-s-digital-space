@@ -473,12 +473,12 @@ const Terminal = () => {
         <div className="w-3 h-3 rounded-full bg-yellow-500" />
         <div className="w-3 h-3 rounded-full bg-primary" />
         <span className="ml-2 text-xs text-muted-foreground">
-          iv4o@iv4o.online: ~ {dinoMode ? "[ DINO GAME :D ]" : girlMode ? "[ <3 ]" : ""}
+          iv4o@iv4o.online: ~ {snakeMode ? "[ 🐍 SNAKE :D ]" : dinoMode ? "[ DINO GAME :D ]" : girlMode ? "[ <3 ]" : ""}
         </span>
       </div>
 
       {/* Terminal body */}
-      <div className="p-4 h-80 overflow-y-auto font-mono text-sm">
+      <div className="p-4 h-96 overflow-y-auto font-mono text-sm">
         {history.map((entry, i) => (
           <div key={i} className="mb-2">
             {entry.cmd && (
@@ -495,23 +495,37 @@ const Terminal = () => {
             </pre>
           </div>
         ))}
-
-        <form onSubmit={handleSubmit} className="flex items-center">
-          <span className="text-cyber-purple">iv4o</span>
-          <span className="text-muted-foreground">@</span>
-          <span className="text-cyber-blue">terminal</span>
-          <span className="text-muted-foreground">:~$ </span>
-          <input
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-primary caret-primary ml-1"
-            autoFocus
-            placeholder={
-              girlMode ? 'да / не :3' : dinoMode ? 'Enter = скок! :D' : ''
-            }
+        {snakeMode ? (
+          <SnakeGame
+            onExit={(score) => {
+              setSnakeMode(false);
+              setHistory((prev) => [
+                ...prev,
+                {
+                  cmd: "",
+                  output: `  🐍 Snake приключи! Резултат: ${score} точки! ${score >= 100 ? ":D :D :D" : score >= 50 ? ":D" : ":P"}`,
+                },
+              ]);
+            }}
           />
-        </form>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex items-center">
+            <span className="text-cyber-purple">iv4o</span>
+            <span className="text-muted-foreground">@</span>
+            <span className="text-cyber-blue">terminal</span>
+            <span className="text-muted-foreground">:~$ </span>
+            <input
+              ref={inputRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="flex-1 bg-transparent outline-none text-primary caret-primary ml-1"
+              autoFocus
+              placeholder={
+                girlMode ? 'да / не :3' : dinoMode ? 'Enter = скок! :D' : ''
+              }
+            />
+          </form>
+        )}
         <div ref={bottomRef} />
       </div>
     </div>
