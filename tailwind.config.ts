@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        mono: ['"JetBrains Mono"', 'monospace'],
+        heading: ['"Space Grotesk"', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -46,6 +50,14 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        terminal: {
+          green: "hsl(var(--terminal-green))",
+          dim: "hsl(var(--terminal-dim))",
+        },
+        cyber: {
+          purple: "hsl(var(--cyber-purple))",
+          blue: "hsl(var(--cyber-blue))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
