@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import SnakeGame from "./SnakeGame";
 
 type HistoryEntry = { cmd: string; output: string };
 
@@ -92,7 +93,8 @@ const COMMANDS: Record<string, string> = {
   ║  flip       - обърни маса >:(   ║
   ║  sudo       - опитай ;)         ║
   ║  matrix     - follow the rabbit ║
-  ║  ascii      - ASCII арт :3      ║
+  ║  ascii       - ASCII арт :3     ║
+  ║  snake      - 🐍 змия! :D      ║
   ║  clear      - изчисти всичко    ║
   ╚═══════════════════════════════════╝`,
 
@@ -250,14 +252,22 @@ const COMMANDS: Record<string, string> = {
 };
 
 const JOKES = [
-  "Защо програмистите носят очила?\nЗащото не могат да C# :D :D :D",
-  "Колко програмисти трябват за да сменят крушка?\nНито един, това е хардуерен проблем :P",
-  "Жена ми ми каза: 'Иди в магазина и купи мляко. Ако имат яйца, вземи 6.'\nВърнах се с 6 млека.\nТя: 'Защо?!'\nАз: 'Имаха яйца.' B-)",
-  "!false\nСмешно е защото е true :D",
-  "Има 10 вида хора: тези, които разбират двоична система и тези, които не :P",
-  "// TODO: Добави виц по-късно\n// Този коментар е от 2019 :(",
-  "Мерна единица за красота?\n1 mili-Helen = количеството красота нужно да се пусне 1 кораб :D",
-  "Защо Java разработчиците носят очила?\nЗащото не могат C# XD",
+  "Чък Норис пита дете:\n- На колко години си?\n- На 11.\n- Аз на твоите години бях на 12. :D",
+  "Когато Александър Бел изобретил телефона, той имал три неприети обаждания от Чък Норис :O",
+  "Чък Норис отваря хладилника и вижда, че пудингът се тресе.\nКазва:\n- Спокойно, дошъл съм за бира! :D :D",
+  "Чък Норис се нуждае от дубльор за каскадите си, само когато трябва да плаче... :')",
+  "Когато Чък Норис приключи с тренировката. Тежестите имат нужда от почивка :P",
+  "Когато Чък Норис заминавал в колеж, той казал на баща си:\n- Сега - ти ще бъдеш мъжа в тая къща! B-)",
+  "Чък Норис отишъл веднъж на сбирка на феминистки и се върнал с изгладени дрехи и сандвич XD",
+  "Чък Норис може да делят на нула. Нулата е тази, която трябва да внимава :O",
+  "Чък Норис не прави лицеви опори. Той натиска Земята надолу :D",
+  "Чък Норис преброил до безкрайност. Два пъти. B-)",
+  "Иванчо пита баща си:\n- Тате, какво е алкохол?\n- Виж, стоят две дървета. Алкохолът е когато виждаш четири.\n- Ама, тате, там има само едно дърво... :D :D",
+  "Учителката пита Иванчо:\n- Иванчо, кажи ми три животни!\n- Куче, котка и кученце! :P",
+  "Иванчо:\n- Мамо, днес учителката ме похвали!\n- Браво! За какво?\n- Попита кой не си е написал домашното и само аз вдигнах ръка! :D",
+  "Иванчо на изпит:\n- Иванчо, кажи ми какво знаеш за Черно море?\n- Черно е! :P :P",
+  "Иванчо на учителката:\n- Може ли да бъда наказан за нещо, което не съм направил?\n- Не, разбира се!\n- Добре, не съм си написал домашното :D",
+  "Чък Норис не ползва ctrl+c за копиране. Той гледа кода и кодът се копира сам от страх >:)",
 ];
 
 const Terminal = () => {
@@ -269,6 +279,7 @@ const Terminal = () => {
   const [dinoMode, setDinoMode] = useState(false);
   const [dinoScore, setDinoScore] = useState(0);
   const [dinoAlive, setDinoAlive] = useState(true);
+  const [snakeMode, setSnakeMode] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const dinoInterval = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -423,6 +434,16 @@ const Terminal = () => {
         return;
       }
 
+      if (cmd === "snake" || cmd === "змия") {
+        setSnakeMode(true);
+        setHistory((prev) => [
+          ...prev,
+          { cmd: raw, output: "  🐍 Зареждане на Snake... :D" },
+        ]);
+        setInput("");
+        return;
+      }
+
       if (cmd === "joke" || cmd === "виц") {
         const joke = JOKES[Math.floor(Math.random() * JOKES.length)];
         setHistory((prev) => [...prev, { cmd: raw, output: joke }]);
@@ -452,12 +473,12 @@ const Terminal = () => {
         <div className="w-3 h-3 rounded-full bg-yellow-500" />
         <div className="w-3 h-3 rounded-full bg-primary" />
         <span className="ml-2 text-xs text-muted-foreground">
-          iv4o@iv4o.online: ~ {dinoMode ? "[ DINO GAME :D ]" : girlMode ? "[ <3 ]" : ""}
+          iv4o@iv4o.online: ~ {snakeMode ? "[ 🐍 SNAKE :D ]" : dinoMode ? "[ DINO GAME :D ]" : girlMode ? "[ <3 ]" : ""}
         </span>
       </div>
 
       {/* Terminal body */}
-      <div className="p-4 h-80 overflow-y-auto font-mono text-sm">
+      <div className="p-4 h-96 overflow-y-auto font-mono text-sm">
         {history.map((entry, i) => (
           <div key={i} className="mb-2">
             {entry.cmd && (
@@ -474,23 +495,37 @@ const Terminal = () => {
             </pre>
           </div>
         ))}
-
-        <form onSubmit={handleSubmit} className="flex items-center">
-          <span className="text-cyber-purple">iv4o</span>
-          <span className="text-muted-foreground">@</span>
-          <span className="text-cyber-blue">terminal</span>
-          <span className="text-muted-foreground">:~$ </span>
-          <input
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-primary caret-primary ml-1"
-            autoFocus
-            placeholder={
-              girlMode ? 'да / не :3' : dinoMode ? 'Enter = скок! :D' : ''
-            }
+        {snakeMode ? (
+          <SnakeGame
+            onExit={(score) => {
+              setSnakeMode(false);
+              setHistory((prev) => [
+                ...prev,
+                {
+                  cmd: "",
+                  output: `  🐍 Snake приключи! Резултат: ${score} точки! ${score >= 100 ? ":D :D :D" : score >= 50 ? ":D" : ":P"}`,
+                },
+              ]);
+            }}
           />
-        </form>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex items-center">
+            <span className="text-cyber-purple">iv4o</span>
+            <span className="text-muted-foreground">@</span>
+            <span className="text-cyber-blue">terminal</span>
+            <span className="text-muted-foreground">:~$ </span>
+            <input
+              ref={inputRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="flex-1 bg-transparent outline-none text-primary caret-primary ml-1"
+              autoFocus
+              placeholder={
+                girlMode ? 'да / не :3' : dinoMode ? 'Enter = скок! :D' : ''
+              }
+            />
+          </form>
+        )}
         <div ref={bottomRef} />
       </div>
     </div>
