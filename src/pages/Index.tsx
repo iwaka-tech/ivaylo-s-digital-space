@@ -35,13 +35,23 @@ const Index = () => {
                   "Junior Software Engineer :D",
                   "C# Developer (=^.^=)",
                   "Systems Explorer B-)",
-                  "DNS & Networking Enthusiast ;)",
                   "Кафе-зависим програмист XD",
                 ]}
                 speed={60}
                 deleteSpeed={30}
                 pauseTime={2500}
               />
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-6 opacity-0 animate-fade-in-up" style={{ animationDelay: "600ms", animationFillMode: "forwards" }}>
+              <Link
+                to="/blog"
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary/10 border-2 border-primary text-primary font-mono text-sm md:text-base hover:bg-primary hover:text-primary-foreground transition-all border-glow hover:scale-105"
+              >
+                <span className="text-glow group-hover:text-primary-foreground">{">"}</span>
+                <span className="font-semibold">read_blog()</span>
+                <span className="animate-blink">_</span>
+              </Link>
             </div>
 
             <div className="flex items-center justify-center gap-2 text-xs text-terminal-dim opacity-0 animate-fade-in-up" style={{ animationDelay: "800ms", animationFillMode: "forwards" }}>
