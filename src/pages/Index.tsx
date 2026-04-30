@@ -35,7 +35,6 @@ const Index = () => {
                   "Junior Software Engineer :D",
                   "C# Developer (=^.^=)",
                   "Systems Explorer B-)",
-                  "DNS & Networking Enthusiast ;)",
                   "Кафе-зависим програмист XD",
                 ]}
                 speed={60}
