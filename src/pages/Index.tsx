@@ -4,6 +4,7 @@ import Terminal from "@/components/Terminal";
 import GlitchText from "@/components/GlitchText";
 import InfoCard from "@/components/InfoCard";
 import KonamiEasterEgg from "@/components/KonamiEasterEgg";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -110,7 +111,15 @@ const Index = () => {
           <div className="mb-2">
             <span className="text-terminal-dim">$</span> echo "Built with {'<3'} by Ivaylo :D"
           </div>
-          <div className="flex items-center justify-center gap-4 mb-2">
+          <div className="flex items-center justify-center gap-4 mb-2 flex-wrap">
+            <Link to="/blog" className="text-primary hover:text-glow transition-colors">{">"} blog</Link>
+            <span>|</span>
+            <span>iv4o.online</span>
+            <span>|</span>
+            <span>@phamtombyte</span>
+            <span>|</span>
+            <span>ivoo21abc@gmail.com</span>
+          </div>
             <span>iv4o.online</span>
             <span>|</span>
             <span>@phamtombyte</span>
