@@ -120,12 +120,6 @@ const Index = () => {
             <span>|</span>
             <span>ivoo21abc@gmail.com</span>
           </div>
-            <span>iv4o.online</span>
-            <span>|</span>
-            <span>@phamtombyte</span>
-            <span>|</span>
-            <span>ivoo21abc@gmail.com</span>
-          </div>
           <div>iv4o.online (c) {new Date().getFullYear()} :)</div>
           <div className="mt-2 text-terminal-dim text-[10px]">
             psst... опитай Konami Code: ↑↑↓↓←→←→BA :O
