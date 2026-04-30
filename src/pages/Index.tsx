@@ -43,6 +43,17 @@ const Index = () => {
               />
             </div>
 
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-6 opacity-0 animate-fade-in-up" style={{ animationDelay: "600ms", animationFillMode: "forwards" }}>
+              <Link
+                to="/blog"
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary/10 border-2 border-primary text-primary font-mono text-sm md:text-base hover:bg-primary hover:text-primary-foreground transition-all border-glow hover:scale-105"
+              >
+                <span className="text-glow group-hover:text-primary-foreground">{">"}</span>
+                <span className="font-semibold">read_blog()</span>
+                <span className="animate-blink">_</span>
+              </Link>
+            </div>
+
             <div className="flex items-center justify-center gap-2 text-xs text-terminal-dim opacity-0 animate-fade-in-up" style={{ animationDelay: "800ms", animationFillMode: "forwards" }}>
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse-glow" />
               <span>STATUS: ONLINE :D</span>
